@@ -1,0 +1,19 @@
+version: '3'
+services:
+  oracle11g:
+    image: jaspeen/oracle-xe-11g
+    container_name: oracle11g
+    ports:
+      - 1521:1521
+
+  spring:
+    image: yechan95/spring-docker
+    container_name: springboot
+    ports:
+      - '8082:5003'
+    links:
+      - oracle11g
+
+    environment:
+      SPRING_DATASOURCE_USERNAME: system
+      SPRING_DATASOURCE_PASSWORD: oracle
